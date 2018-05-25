@@ -41,13 +41,17 @@ int getMac(const char *iface, char* mac)
 
 static std::vector<std::size_t> GLOBAL_machineMacAddr = 
 {
-  1393188468574421674
+    
+    10860675402256484417U
+  , 1393188468574421674U
 };
 
 bool checkComputerMacAddr(){
     char macAddr[MAC_STRING_LENGTH];
 
-    getMac("enp4s0f0", macAddr );
+    // getMac("eth0", macAddr );
+    // getMac("enp4s0f0", macAddr );
+    getMac("enp0s25", macAddr );
     
     std::string macStr = std::string(macAddr);
 
