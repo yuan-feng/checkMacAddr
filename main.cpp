@@ -39,9 +39,9 @@ int getMac(const char *iface, char* mac)
 }
 
 
-static std::vector<std::string> GLOBAL_machineMacAddr = 
+static std::vector<std::size_t> GLOBAL_machineMacAddr = 
 {
-  "0~c!c@4#7$a%3^4&f*8(f)6_" 
+  1393188468574421674
 };
 
 bool checkComputerMacAddr(){
@@ -51,14 +51,17 @@ bool checkComputerMacAddr(){
     
     std::string macStr = std::string(macAddr);
 
-    std::hash<std::string> strHash ; 
-    std::unordered_set<std::size_t> machineMacAddrSet ; 
-    for (auto item: GLOBAL_machineMacAddr){
-        machineMacAddrSet.insert( strHash( item ) ) ; 
-    }
-
     addSalt(macStr);
+
+    std::hash<std::string> strHash ; 
     auto thisMachineHash = strHash(macStr) ; 
+    std::cerr << " thisMachineHash = " << thisMachineHash << std::endl; 
+
+    std::unordered_set<std::size_t> machineMacAddrSet(
+      GLOBAL_machineMacAddr.begin(), 
+      GLOBAL_machineMacAddr.end()
+      ) ; 
+
     if ( machineMacAddrSet.count(thisMachineHash) > 0 ){
         return true;
     }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <functional>
 
 #include "addSalt.hpp"
 
@@ -19,6 +20,10 @@ int main(int argc, char const *argv[])
 	addSalt(macAddr) ; 
 
 	std::cout << "saltMacAddr = " << macAddr << std::endl;
+
+	std::hash<std::string> strHash ; 
+	auto thisMachineHash = strHash(macAddr) ; 
+	std::cout << "thisMachineHash = " << thisMachineHash << std::endl;
 
 	return 0;
 }
